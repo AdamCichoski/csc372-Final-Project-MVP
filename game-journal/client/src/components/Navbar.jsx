@@ -1,36 +1,19 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { apiPost } from "../api.js";
 
-export default function Navbar() {
-  const [user, setUser] = useState(null);
+export default function Navbar({ user, setUser }) {
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
-
-  // Very lightweight "who am I" check
-  useEffect(() => {
-    async function fetchMe() {
-      try {
-        const res = await fetch("/api/auth/me", { credentials: "include" });
-        if (res.ok) {
-          const data = await res.json();
-          setUser(data);
-        } else {
-          setUser(null);
-        }
-      } catch {
-        setUser(null);
-      }
-    }
-    fetchMe();
-  }, []);
 
   async function handleLogout() {
     try {
-      await fetch("/api/auth/logout", {
-        method: "POST",
-        credentials: "include",
-      });
-    } catch {}
+      await apiPost("/api/auth/logout", {});
+    } catch {
+      // ignore error
+    }
     setUser(null);
+    setMenuOpen(false);
     navigate("/login");
   }
 
@@ -44,16 +27,38 @@ export default function Navbar() {
         <NavLink to="/games" className={linkClass}>
           Games
         </NavLink>
-        <NavLink to="/account" className={linkClass}>
-          Account
-        </NavLink>
+
         {user ? (
-          <>
-            <span className="chip">{user.username || user.email}</span>
-            <button className="nav-button" onClick={handleLogout}>
-              Logout
+          <div className="nav-account">
+            <button
+              type="button"
+              className="nav-account-button"
+              onClick={() => setMenuOpen((open) => !open)}
+            >
+              <span>{user.username || user.email}</span>
+              <span style={{ fontSize: "0.8rem" }}>▾</span>
             </button>
-          </>
+
+            {menuOpen && (
+              <div className="nav-account-menu">
+                <div
+                  className="nav-account-item"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    navigate("/account");
+                  }}
+                >
+                  My Profile
+                </div>
+                <div
+                  className="nav-account-item nav-account-item-danger"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </div>
+              </div>
+            )}
+          </div>
         ) : (
           <NavLink to="/login" className={linkClass}>
             Login

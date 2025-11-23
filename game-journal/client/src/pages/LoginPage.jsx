@@ -1,8 +1,9 @@
+// client/src/pages/LoginPage.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiPost } from "../api.js";
 
-export default function LoginPage() {
+export default function LoginPage({ setUser }) {
   const [mode, setMode] = useState("login");
   const [form, setForm] = useState({
     username: "",
@@ -41,8 +42,10 @@ export default function LoginPage() {
 
       console.log("Submitting to", path, "body:", body);
 
-      await apiPost(path, body);
+      const user = await apiPost(path, body);
 
+      // user is the returned JSON from backend
+      setUser(user);
       navigate("/games");
     } catch (err) {
       console.error("Auth error:", err);

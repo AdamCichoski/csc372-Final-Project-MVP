@@ -9,6 +9,7 @@ import authRoutes from "./routes/authRoutes.js";
 import gameRoutes from "./routes/gameRoutes.js";
 import noteRoutes from "./routes/noteRoutes.js";
 
+
 dotenv.config();
 
 const app = express();
