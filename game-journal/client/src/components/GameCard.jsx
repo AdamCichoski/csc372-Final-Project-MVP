@@ -53,7 +53,7 @@ export default function GameCard({ game, onClick, onDelete }) {
       </div>
 
       <div className="mygame-card-footer">
-        <span className="chip">Notes tracked</span>
+        <span className="chip">Notes</span>
         <button
           className="btn btn-danger"
           type="button"
