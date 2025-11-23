@@ -1,3 +1,4 @@
+// server/index.js
 import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -14,32 +15,37 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 const __dirname = process.cwd();
 
+// --- Middleware ---
 app.use(express.json());
 app.use(cookieParser());
 
-if (process.env.NODE_ENV !== "production") {
-  app.use(
-    cors({
-      origin: process.env.CLIENT_ORIGIN || "http://localhost:5173",
-      credentials: true,
-    })
-  );
-}
+// Simple CORS for dev
+app.use(
+  cors({
+    origin: process.env.CLIENT_ORIGIN || "http://localhost:5173",
+    credentials: true,
+  })
+);
 
-// Static for uploaded files
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// API routes
+app.get("/api/health", (req, res) => {
+  res.json({ status: "ok", message: "Game Journal API is running" });
+});
+
 app.use("/api/auth", authRoutes);
 app.use("/api/games", gameRoutes);
 app.use("/api/notes", noteRoutes);
 
-// Serve React build in production
 const clientDist = path.join(__dirname, "client", "dist");
 app.use(express.static(clientDist));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(clientDist, "index.html"));
+  try {
+    res.sendFile(path.join(clientDist, "index.html"));
+  } catch {
+    res.status(404).send("Not found");
+  }
 });
 
 app.listen(PORT, () => {
