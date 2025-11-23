@@ -4,14 +4,14 @@ import cors from "cors";
 import path from "path";
 import dotenv from "dotenv";
 
-import authRoutes from "/routes/authRoutes.js";
-import gameRoutes from "/routes/gameRoutes.js";
-import noteRoutes from "/routes/noteRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
+import gameRoutes from "./routes/gameRoutes.js";
+import noteRoutes from "./routes/noteRoutes.js";
 
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 const __dirname = process.cwd();
 
 app.use(express.json());
