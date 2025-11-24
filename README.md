@@ -10,7 +10,9 @@
   <p>
     Game Journal is a full-stack web app for PC gamers to track games and notes.
     This document explains how to set it up from scratch after cloning the repo.
+    Check <a href="https://uncg-my.sharepoint.com/:v:/g/personal/ajcichoski_uncg_edu/IQCRuvkZjcJATLGSgLcZgghRAbpMhFhjbuWkMPL-QDNUtCc?e=SUYApk"> this link</a> for a demo of the app, or follow the link below.
   </p>
+  <a href="https://uncg-my.sharepoint.com/:v:/g/personal/ajcichoski_uncg_edu/IQCRuvkZjcJATLGSgLcZgghRAbpMhFhjbuWkMPL-QDNUtCc?e=SUYApk">https://uncg-my.sharepoint.com/:v:/g/personal/ajcichoski_uncg_edu/IQCRuvkZjcJATLGSgLcZgghRAbpMhFhjbuWkMPL-QDNUtCc?e=SUYApk</a>
 
   <h2>1. Prerequisites</h2>
   <ul>
