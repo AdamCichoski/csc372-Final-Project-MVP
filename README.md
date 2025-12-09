@@ -13,7 +13,10 @@
     Check <a href="https://uncg-my.sharepoint.com/:v:/g/personal/ajcichoski_uncg_edu/IQCRuvkZjcJATLGSgLcZgghRAbpMhFhjbuWkMPL-QDNUtCc?e=SUYApk"> this link</a> for a demo of the app, or follow the link below.
   </p>
   <a href="https://uncg-my.sharepoint.com/:v:/g/personal/ajcichoski_uncg_edu/IQCRuvkZjcJATLGSgLcZgghRAbpMhFhjbuWkMPL-QDNUtCc?e=SUYApk">https://uncg-my.sharepoint.com/:v:/g/personal/ajcichoski_uncg_edu/IQCRuvkZjcJATLGSgLcZgghRAbpMhFhjbuWkMPL-QDNUtCc?e=SUYApk</a>
-
+<p>
+  Here is a link to the deployed website on Render:
+</p>
+<a href="https://gamejournal-iov3.onrender.com/">Game Journal on Render</a>
   <h2>1. Prerequisites</h2>
   <ul>
     <li><strong>Node.js</strong> 20.x or later (LTS recommended)</li>
@@ -260,5 +263,67 @@ npm start            # Express serves API + built frontend
     <li>React frontend running on <code>http://localhost:5173</code> (dev)</li>
     <li>Or a single production server via <code>npm start</code></li>
   </ul>
+
+  <h2>10. Reflection</h2>
+
+  <h3>Design Choices</h3>
+  <p>
+    I chose React for the frontend because its component-based structure makes it easy to break the UI into reusable,
+    maintainable pieces. This layout style aligns well with how I think about pages and views, and React’s ecosystem
+    made it straightforward to manage state and navigation between different parts of the app (login, game list,
+    notes, etc.).
+  </p>
+  <p>
+    On the backend, I separated the API routes, authentication utilities, database access, and external API helpers
+    into their own modules. This structure keeps concerns isolated and makes it easier to reason about specific
+    behaviors (such as auth, database queries, or Steam API calls) without cluttering a single large file. Using
+    PostgreSQL with a relatively simple relational schema (users, game_packets, notes) allowed me to model the
+    relationships between users, their game “packets,” and associated notes in a clear, normalized way.
+  </p>
+
+  <h3>Challenges</h3>
+  <p>
+    One of the main challenges was working with the Steam Web API. It was not immediately obvious how to reliably
+    obtain a list of around 50 suggested games that would feel useful in the context of the app. I solved this by
+    looping through candidate games from the API, filtering out invalid or incomplete entries, and ensuring I did
+    not add duplicates for the same user. This required some trial and error with the API responses and additional
+    checks in the backend logic.
+  </p>
+  <p>
+    Another challenge was deployment. Although the GitHub integration with Render ultimately made the process smoother,
+    there was a learning curve in configuring environment variables, build commands, and correctly wiring the frontend
+    and backend for a production environment. Getting everything to work end-to-end from a fresh clone on Render
+    taught me how small configuration mistakes (for example, missing environment variables or incorrect build paths)
+    can break a full-stack deployment.
+  </p>
+
+  <h3>Learning Outcomes</h3>
+  <p>
+    This project helped me better understand how a full-stack application fits together from local development to
+    production deployment. On the frontend, I gained experience structuring a React app backed by an API, managing
+    state across components, and handling authenticated requests to protected routes. On the backend, I reinforced
+    my understanding of Express routing, middleware, and organizing logic into separate files for auth, database
+    operations, and external API integration.
+  </p>
+  <p>
+    I also learned practical lessons about deployment workflows. Using Render’s GitHub integration showed me how a
+    CI-style deployment can be triggered by pushes to the repository and how important it is to keep environment
+    variables, database configuration, and build steps consistent between local and production environments. Overall,
+    I came away with a clearer view of how to make a full-stack app reproducible, configurable, and deployable.
+  </p>
+
+  <h3>Future Work</h3>
+  <p>
+    With more time, I would like to expand the app to support sharing game journals between users. This would require
+    additional API endpoints and changes to the database schema to handle shared access or permissions for specific
+    game packets and notes. It would also introduce new UI flows for inviting other users, accepting shared journals,
+    and managing what is public or private.
+  </p>
+  <p>
+    Beyond sharing, there are other potential enhancements such as richer game metadata from the Steam API, improved
+    search and filtering within a user’s journal, and more robust validation and error handling throughout the app.
+    These features would make Game Journal more collaborative, more discoverable, and more resilient as a tool for
+    tracking and reflecting on a user’s PC gaming history.
+  </p>
 </body>
 </html>
