@@ -13,7 +13,7 @@ import noteRoutes from "./routes/noteRoutes.js";
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT;
 const __dirname = process.cwd();
 
 // --- Middleware ---
@@ -49,6 +49,12 @@ app.get("*", (req, res) => {
   }
 });
 
+
+if (!PORT) {
+  console.error("FATAL: process.env.PORT is not set");
+  process.exit(1);
+}
+
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
