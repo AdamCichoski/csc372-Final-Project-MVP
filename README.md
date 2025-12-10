@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Game Journal - Setup Guide</title>
 </head>
 <body>
   <h1>Game Journal - Setup & Run Guide</h1>
