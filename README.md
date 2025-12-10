@@ -16,7 +16,7 @@
 <p>
   Here is a link to the deployed website on Render:
 </p>
-<a href="https://gamejournal-iov3.onrender.com/">Game Journal on Render</a>
+<a href="https://gamejournal-iov3.onrender.com/" target="_blank">Game Journal on Render</a>
   <h2>1. Prerequisites</h2>
   <ul>
     <li><strong>Node.js</strong> 20.x or later (LTS recommended)</li>
